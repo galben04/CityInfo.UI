@@ -1,0 +1,32 @@
+<div class="container">
+<p-table [value]="cities">
+    <ng-template pTemplate="header">
+        <tr>
+        <th>Id</th>
+        <th>City Name</th>
+        <th>Description</th>
+        <th>Attractions</th>
+        </tr>
+    </ng-template>
+
+    <ng-template pTemplate="body" let-city>
+        <tr >
+            <td>{{city.Id}}</td>
+            <td>{{city.Name}}</td>
+            <td>{{city.Description}}</td>
+            <td>
+                <a *ngIf="!isAttractionShowed; else attractionShowed" class="btn fas fa-arrow-alt-circle-down fa-2x" (click)="AttractionsClicked()"></a>
+                
+                <ng-template #attractionShowed>
+                    <a class="fas fa-arrow-alt-circle-up fa-2x" (click)="AttractionsClicked()"></a>
+                </ng-template>
+            </td>
+        </tr>
+        <tr *ngIf="isAttractionShowed">
+            <td colspan="4">
+                <pm-points [cityId] = 'city.Id'></pm-points>
+            </td>
+        </tr>
+    </ng-template>
+</p-table>
+</div>
